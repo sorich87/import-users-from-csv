@@ -105,6 +105,8 @@ class IS_IU_Import_Users {
 					$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
 					$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
 
+					do_action( 'is_iu_pre_user_import', $userdata, $usermeta );
+
 					if ( empty( $userdata['user_pass'] ) )
 						$userdata['user_pass'] = wp_generate_password( 12, false );
 
@@ -130,6 +132,8 @@ class IS_IU_Import_Users {
 
 						$user_ids[] = $user_id;
 					}
+
+					do_action( 'is_iu_post_user_import', $user_id );
 				}
 
 				do_action( 'is_iu_post_users_import', $user_ids, $errors );
