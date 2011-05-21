@@ -3,7 +3,7 @@ Contributors: sorich87
 Tags: user, users, csv, import, admin
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: 0.1
+Stable tag: 0.2
 
 Import users from a CSV file
 
@@ -41,10 +41,16 @@ User import screen
 
 == Changelog ==
 
+= 0.2 =
+* First public release.
+
 = 0.1 =
 * First release.
 
 == Upgrade Notice ==
 
-= 0.5 =
+= 0.2 =
+First public release.
+
+= 0.1 =
 First release.
