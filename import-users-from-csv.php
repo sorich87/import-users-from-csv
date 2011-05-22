@@ -70,12 +70,12 @@ class IS_IU_Import_Users {
 				if ( ! $rows )
 					wp_redirect( add_query_arg( 'import', 'data', wp_get_referer() ) );
 
-				$password_nag 		= isset( $_GET['password_nag'] ) ? $_GET['password_nag'] : false;
-				$notification_email = isset( $_GET['notification_email'] ) ? $_GET['notification_email'] : false;
-				$errors = $user_ids = array();
-				$headers            = str_getcsv( $rows[0] );
-				$rows               = array_slice( $rows, 1 );
-				$userdata_fields    = array(
+				$password_nag 		   = isset( $_GET['password_nag'] ) ? $_GET['password_nag'] : false;
+				$new_user_notification = isset( $_GET['new_user_notification'] ) ? $_GET['new_user_notification'] : false;
+				$errors = $user_ids    = array();
+				$headers               = str_getcsv( $rows[0] );
+				$rows                  = array_slice( $rows, 1 );
+				$userdata_fields       = array(
 					'ID', 'user_login', 'user_pass',
 					'user_email', 'user_url', 'user_nicename',
 					'display_name', 'user_registered', 'first_name',
@@ -126,7 +126,7 @@ class IS_IU_Import_Users {
 							if ( $password_nag )
 								update_user_option( $user_id, 'default_password_nag', true, true );
 
-							if ( $notification_email )
+							if ( $new_user_notification )
 								wp_new_user_notification( $user_id, $user_pass );
 						}
 
@@ -204,11 +204,11 @@ class IS_IU_Import_Users {
 				<td><input type="file" id="users_csv" name="users_csv" value="" class="all-options" /></td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e( 'Notification email' ); ?></th>
+				<th scope="row"><?php _e( 'Notification' ); ?></th>
 				<td><fieldset>
-					<legend class="screen-reader-text"><span><?php _e( 'Notification email' ); ?></span></legend>
-					<label for="notification_email">
-						<input id="notification_email" name="notification_email" type="checkbox" value="1" />
+					<legend class="screen-reader-text"><span><?php _e( 'Notification' ); ?></span></legend>
+					<label for="new_user_notification">
+						<input id="new_user_notification" name="new_user_notification" type="checkbox" value="1" />
 						Send to new users
 					</label>
 				</fieldset></td>
