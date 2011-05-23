@@ -42,7 +42,7 @@ class IS_IU_Import_Users {
 	 **/
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
-		add_action( 'admin_init', array( $this, 'process_csv' ) );
+		add_action( 'init', array( $this, 'process_csv' ) );
 	}
 
 	/**
@@ -70,8 +70,8 @@ class IS_IU_Import_Users {
 				if ( ! $rows )
 					wp_redirect( add_query_arg( 'import', 'data', wp_get_referer() ) );
 
-				$password_nag 		   = isset( $_GET['password_nag'] ) ? $_GET['password_nag'] : false;
-				$new_user_notification = isset( $_GET['new_user_notification'] ) ? $_GET['new_user_notification'] : false;
+				$password_nag 		   = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
+				$new_user_notification = isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
 				$errors = $user_ids    = array();
 				$headers               = str_getcsv( $rows[0] );
 				$rows                  = array_slice( $rows, 1 );
@@ -127,7 +127,7 @@ class IS_IU_Import_Users {
 								update_user_option( $user_id, 'default_password_nag', true, true );
 
 							if ( $new_user_notification )
-								wp_new_user_notification( $user_id, $user_pass );
+								wp_new_user_notification( $user_id, $userdata['user_pass'] );
 						}
 
 						$user_ids[] = $user_id;
