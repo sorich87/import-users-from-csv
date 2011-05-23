@@ -5,11 +5,11 @@
  */
 /*
 Plugin Name: Import Users from CSV
-Plugin URI: http://intside.com/
+Plugin URI: http://pubpoet.com/plugins/import-users-from-csv/
 Description: Import Users data and metadata from csv file.
 Author: Intside
 Version: 0.2
-Author URI: http://intside.com/
+Author URI: http://pubpoet.com/
 */
 
 if ( ! function_exists( 'str_getcsv' ) ) {
@@ -225,7 +225,7 @@ class IS_IU_Import_Users {
 			</tr>
 		</table>
 		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e( 'Upload' ); ?>" />
+			<input type="submit" class="button-primary" value="<?php _e( 'Import' ); ?>" />
 		</p>
 	</form>
 <?php
