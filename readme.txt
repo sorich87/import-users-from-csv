@@ -3,7 +3,7 @@ Contributors: sorich87
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: 0.3
+Stable tag: 0.2.1
 
 Import users from a CSV file into WordPress
 
@@ -71,7 +71,7 @@ You can try importing that file and look at the result.
 
 == Changelog ==
 
-= 0.3 =
+= 0.2.1 =
 * Added missing example file
 * Fixed bug with redirection after csv processing
 * Fixed error logging
@@ -88,7 +88,7 @@ You can try importing that file and look at the result.
 
 == Upgrade Notice ==
 
-= 0.3 =
+= 0.2.1 =
 Various bug fixes and documentation improvements.
 
 = 0.2 =
