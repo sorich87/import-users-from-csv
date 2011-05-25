@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Import_Users_from_CSV
- * @version 0.2
+ * @version 0.3
  */
 /*
 Plugin Name: Import Users from CSV
 Plugin URI: http://pubpoet.com/plugins/
 Description: Import Users data and metadata from csv file.
 Author: PubPoet
-Version: 0.2
+Version: 0.3
 Author URI: http://pubpoet.com/
 */
 
