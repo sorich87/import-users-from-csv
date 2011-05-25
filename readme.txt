@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: sorich87
-Tags: user, users, csv, batch, import, admin
+Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
 Tested up to: 3.2
 Stable tag: 0.2
@@ -19,12 +19,12 @@ You can also choose to send a notification to the new users and to display passw
 
 * Imports all users fields
 * Imports user meta
-* Update
+* Update existing users by specifying ID field
 * Allows setting user role
 * Sends new user notification (if the option is selected)
 * Shows password nag on user login (if the option is selected)
 
-For feature request and bug reports: [pubpoet.com](http://pubpoet.com/contact/).
+For feature request and bug reports, [please use the forums](http://wordpress.org/tags/import-users-from-csv?forum_id=10#postform).
 
 == Installation ==
 
@@ -35,15 +35,18 @@ For an automatic installation through WordPress:
 1. Click 'Install Now' and activate the plugin
 1. Upload your CSV file in the 'Users' menu, under 'Import From CSV'
 
+
 Or use a nifty tool by WordPress lead developer Mark Jaquith:
 
 1. Visit [this link](http://coveredwebservices.com/wp-plugin-install/?plugin=import-users-from-csv) and follow the instructions.
+
 
 For a manual installation via FTP:
 
 1. Upload the `import-users-from-csv` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' screen in your WordPress admin area
 1. Upload your CSV file in the 'Users' menu, under 'Import From CSV'
+
 
 To upload the plugin through WordPress, instead of FTP:
 
@@ -54,7 +57,7 @@ To upload the plugin through WordPress, instead of FTP:
 
 = How to use? =
 
-Click on the 'Import From CSV' link in the 'Users' menu, choose if you want to send a notification email to new users and if you want the password nag to be displayed when they login and click 'Import'.
+Click on the 'Import From CSV' link in the 'Users' menu, choose your CSV file, choose if you want to send a notification email to new users and if you want the password nag to be displayed when they login, then click 'Import'.
 
 Each row in your CSV file should represent a user; each column identifies user data or meta data.
 If a column name matches a field in the user table, data from this column is imported in that field; if not, data is imported in a user meta field with the name of the column.

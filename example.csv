@@ -1,0 +1,3 @@
+"user_login","user_email","user_pass","first_name","last_name","custom_usermeta_1","custom_usermeta_2"
+"johndoe","john.doe@localhost.localdomain",,"John","Doe","Test","Test"
+"janedoe","jane.doe@localhost.localdomain.com","test","Jane","Doe",,

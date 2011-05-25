@@ -5,13 +5,18 @@
  */
 /*
 Plugin Name: Import Users from CSV
-Plugin URI: http://pubpoet.com/plugins/import-users-from-csv/
+Plugin URI: http://pubpoet.com/plugins/
 Description: Import Users data and metadata from csv file.
-Author: Intside
+Author: PubPoet
 Version: 0.2
 Author URI: http://pubpoet.com/
 */
 
+/**
+ * Support for PHP 5.2
+ *
+ * @since 0.1
+ **/
 if ( ! function_exists( 'str_getcsv' ) ) {
 	function str_getcsv( $input, $delimiter=',', $enclosure='"', $escape=null, $eol=null ) {
 		$temp = fopen( "php://memory", "rw" );
@@ -105,6 +110,9 @@ class IS_IU_Import_Users {
 					$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
 					$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
 
+					if ( empty( $userdata ) || empty( $usermeta ) )
+						continue;
+
 					do_action( 'is_iu_pre_user_import', $userdata, $usermeta );
 
 					if ( empty( $userdata['user_pass'] ) )
@@ -147,9 +155,11 @@ class IS_IU_Import_Users {
 				} else {
 					wp_redirect( add_query_arg( 'import', 'success', wp_get_referer() ) );
 				}
-			} else {
-				wp_redirect( add_query_arg( 'import', 'file', wp_get_referer() ) );
+				exit;
 			}
+
+			wp_redirect( add_query_arg( 'import', 'file', wp_get_referer() ) );
+			exit;
 		}
 	}
 
@@ -159,7 +169,7 @@ class IS_IU_Import_Users {
 	 * @since 0.1
 	 **/
 	public function users_page() {
-		if ( ! current_user_can( 'manage_options' ) )
+		if ( ! current_user_can( 'create_users' ) )
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 ?>
 
@@ -168,10 +178,13 @@ class IS_IU_Import_Users {
 	<?php
 	$error_log_file = plugin_dir_url( __FILE__ ) . 'errors.log';
 
-	if ( ! file_exists( $error_log_file ) )
-		@fopen( $error_log_file, 'x' );
+	if ( ! file_exists( $error_log_file ) ) {
+		if ( ! @fopen( $error_log_file, 'x' ) )
+			echo '<div class="updated"><p><strong>Notice: please make the plugin directory writable so that you can see the error log.</strong></p></div>';
+	}
 
 	if ( isset( $_GET['import'] ) ) {
+		$error_log_msg = '';
 		if ( file_exists( $error_log_file ) )
 			$error_log_msg = ", please <a href='$error_log'>check error log</a>";
 
@@ -229,8 +242,6 @@ class IS_IU_Import_Users {
 		</p>
 	</form>
 <?php
-		if ( ! file_exists( $error_log_file ) )
-			echo '<p>Notice: please make the plugin directory writable so that you can see the error log.</p>';
 	}
 
 	/**
@@ -247,7 +258,8 @@ class IS_IU_Import_Users {
 
 		foreach ( $errors as $key => $error ) {
 			$line = $key + 1;
-			@fwrite( $log, "[Line $line] $error\n" );
+			$message = $error->get_error_message();
+			@fwrite( $log, "[Line $line] $message\n" );
 		}
 
 		@fclose( $log );
