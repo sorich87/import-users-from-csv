@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Import_Users_from_CSV
- * @version 0.2.1
+ * @version 0.2.2-beta
  */
 /*
 Plugin Name: Import Users from CSV
 Plugin URI: http://pubpoet.com/plugins/
 Description: Import Users data and metadata from csv file.
 Author: PubPoet
-Version: 0.2.1
+Version: 0.2.2-beta
 Author URI: http://pubpoet.com/
 */
 
@@ -110,27 +110,31 @@ class IS_IU_Import_Users {
 					$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
 					$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
 
-					if ( empty( $userdata ) || empty( $usermeta ) )
+					if ( empty( $userdata ) )
 						continue;
 
 					do_action( 'is_iu_pre_user_import', $userdata, $usermeta );
 
+					$update = ! empty( $userdata['ID'] );
+
 					if ( empty( $userdata['user_pass'] ) )
 						$userdata['user_pass'] = wp_generate_password( 12, false );
 
-					if ( empty( $userdata['ID'] ) )
-						$user_id = wp_insert_user( $userdata );
-					else
+					if ( $update )
 						$user_id = wp_update_user( $userdata );
+					else
+						$user_id = wp_insert_user( $userdata );
 
 					if ( is_wp_error( $user_id ) ) {
 						$errors[$rkey] = $user_id;
 					} else {
-						foreach ( $usermeta as $metakey => $metavalue ) {
-							update_user_meta( $user_id, $metakey, $metavalue );
+						if ( $usermeta ) {
+							foreach ( $usermeta as $metakey => $metavalue ) {
+								update_user_meta( $user_id, $metakey, $metavalue );
+							}
 						}
 
-						if ( empty( $userdata['ID'] ) ) {
+						if ( ! $update ) {
 							if ( $password_nag )
 								update_user_option( $user_id, 'default_password_nag', true, true );
 
