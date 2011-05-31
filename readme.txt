@@ -3,7 +3,7 @@ Contributors: sorich87
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Import users from a CSV file into WordPress
 
@@ -25,6 +25,9 @@ You can also choose to send a notification to the new users and to display passw
 * Shows password nag on user login (if the option is selected)
 
 For feature request and bug reports, [please use the forums](http://wordpress.org/tags/import-users-from-csv?forum_id=10#postform).
+
+= Tutorials =
+[How to Update Existing Users with "Import Users from CSV"](http://pubpoet.com/2011/05/28/update-users-import-users-csv/)
 
 == Installation ==
 
@@ -71,6 +74,10 @@ You can try importing that file and look at the result.
 
 == Changelog ==
 
+= 0.2.2 =
+* Added role to example file
+* Fixed bug with users not imported when no user meta is set
+
 = 0.2.1 =
 * Added missing example file
 * Fixed bug with redirection after csv processing
@@ -87,6 +94,9 @@ You can try importing that file and look at the result.
 * First release.
 
 == Upgrade Notice ==
+
+= 0.2.2 =
+Fix bug with users import when no user meta is set.
 
 = 0.2.1 =
 Various bug fixes and documentation improvements.
