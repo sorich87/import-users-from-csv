@@ -68,6 +68,10 @@ If a column name matches a field in the user table, data from this column is imp
 Look at the example.csv file in the plugin directory to have a better understanding of how the your CSV file should be organized.
 You can try importing that file and look at the result.
 
+= How to Update Existing Users? =
+
+See [How to Update Existing Users with "Import Users from CSV"](http://pubpoet.com/2011/05/28/update-users-import-users-csv/)
+
 == Screenshots ==
 
 1. User import screen

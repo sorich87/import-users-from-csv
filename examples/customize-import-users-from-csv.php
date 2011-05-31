@@ -6,7 +6,7 @@
 /*
 Plugin Name: Customize Import Users from CSV
 Plugin URI: http://pubpoet.com/plugins/
-Description: Customize Import Users from CSV plugin.
+Description: Customize Import Users from CSV plugin. This is an example plugin. It shows how to modify the data retrieved from the CSV files.
 Version: 0.1
 Author: PubPoet
 Author URI: http://pubpoet.com/
@@ -51,6 +51,7 @@ class IS_IU_Custom_Import_Users {
 	 * @since 0.1
 	 **/
 	public function filter_import_userdata( $userdata, $usermeta ) {
+		// do your changes here
 
 		return $userdata;
 	}
@@ -61,6 +62,7 @@ class IS_IU_Custom_Import_Users {
 	 * @since 0.1
 	 **/
 	public function filter_import_usermeta( $usermeta, $userdata ) {
+		// do your changes here
 
 		return $usermeta;
 	}
