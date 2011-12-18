@@ -1,0 +1,112 @@
+# Translation of the WordPress plugin Import Users from CSV 0.3 by PubPoet.
+# Copyright (C) 2011 PubPoet
+# This file is distributed under the same license as the Import Users from CSV package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Import Users from CSV 0.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/import-users-from-csv\n"
+"POT-Creation-Date: 2011-12-17 16:55+0100\n"
+"PO-Revision-Date: 2011-12-17 18:13+0100\n"
+"Last-Translator: Ulrich Sossou <sorich87@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: import-users-from-csv.php:59
+msgid "Import From CSV"
+msgstr "Importer Un Fichier CSV"
+
+#: import-users-from-csv.php:212
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Vous n'avez pas les permissions suffisantes pour accéder à cette page."
+
+#: import-users-from-csv.php:216
+msgid "Import users from a CSV file"
+msgstr "Importer des utilisateurs à partir d'un fichier CSV"
+
+#: import-users-from-csv.php:223
+#, php-format
+msgid "Notice: please make the directory %s writable so that you can see the error log."
+msgstr "Note : veuillez rendre le répertoire %s inscriptible pour voir le rapport d'erreurs."
+
+#: import-users-from-csv.php:229
+#, php-format
+msgid ", please <a href=\"%s\">check the error log</a>"
+msgstr ", veuillez <a href=\"%s\">consulter le rapport d'erreurs</a>"
+
+#: import-users-from-csv.php:233
+msgid "Error during file upload."
+msgstr "Erreur de téléchargement du fichier."
+
+#: import-users-from-csv.php:236
+msgid "Cannot extract data from uploaded file or no file was uploaded."
+msgstr "Impossible d'extraire les données du fichier téléchargé ou aucun fichier téléchargé."
+
+#: import-users-from-csv.php:239
+#, php-format
+msgid "No user was successfully imported%s."
+msgstr "Aucun utilisateur importé avec succès%s."
+
+#: import-users-from-csv.php:242
+#, php-format
+msgid "Some users were successfully imported but some were not%s."
+msgstr "Certains utilisateurs ont été importés avec succès, d'autres non%s."
+
+#: import-users-from-csv.php:245
+msgid "Users import was successful."
+msgstr "L'importation des utilisateurs a réussi."
+
+#: import-users-from-csv.php:256
+msgid "CSV file"
+msgstr "Fichier CSV"
+
+#: import-users-from-csv.php:260
+#: import-users-from-csv.php:262
+msgid "Notification"
+msgstr "Notification"
+
+#: import-users-from-csv.php:270
+#: import-users-from-csv.php:272
+msgid "Password nag"
+msgstr "Notification de changement du mot de passe par défaut"
+
+#: import-users-from-csv.php:281
+msgid "Import"
+msgstr "Importer"
+
+#: import-users-from-csv.php:297
+#, php-format
+msgid "BEGIN %s"
+msgstr "DEBUT %s"
+
+#: import-users-from-csv.php:302
+#, php-format
+msgid "[Line %1$s] %2$s"
+msgstr "[Ligne %1$s] %2$s"
+
+#. Plugin Name of the plugin/theme
+msgid "Import Users from CSV"
+msgstr "Importer des Utilisateurs d'un Fichier CSV"
+
+#. Plugin URI of the plugin/theme
+msgid "http://pubpoet.com/plugins/"
+msgstr "http://pubpoet.com/plugins/"
+
+#. Description of the plugin/theme
+msgid "Import Users data and metadata from a csv file."
+msgstr "Importer les données et métadonnées des utilisateurs à partir d'un fichier csv."
+
+#. Author of the plugin/theme
+msgid "PubPoet"
+msgstr "PubPoet"
+
+#. Author URI of the plugin/theme
+msgid "http://pubpoet.com/"
+msgstr "http://pubpoet.com/"
+
