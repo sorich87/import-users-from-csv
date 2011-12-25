@@ -115,6 +115,9 @@ class IS_IU_Import_Users {
 						$column_name = $headers[$ckey];
 						$column = trim( $column );
 
+						if ( empty( $column ) )
+							continue;
+
 						if ( in_array( $column_name, $userdata_fields ) ) {
 							$userdata[$column_name] = $column;
 						} else {
@@ -148,7 +151,7 @@ class IS_IU_Import_Users {
 					// Insert or update... at last! If only user ID was provided, we don't need to do anything at all. :)
 					if ( array( 'ID' => $user_id ) == $userdata )
 						$user_id = get_userdata( $user_id )->ID; // To check if the user id exists
-					if ( $update )
+					else if ( $update )
 						$user_id = wp_update_user( $userdata );
 					else
 						$user_id = wp_insert_user( $userdata );
