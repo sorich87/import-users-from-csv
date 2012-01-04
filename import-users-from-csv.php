@@ -109,6 +109,9 @@ class IS_IU_Import_Users {
 
 				// Let's process the data
 				foreach ( $rows as $rkey => $columns ) {
+					if ( ! $columns )
+						continue;
+
 					// Separate user data from meta
 					$userdata = $usermeta = array();
 					foreach ( $columns as $ckey => $column ) {
