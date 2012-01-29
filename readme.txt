@@ -2,8 +2,8 @@
 Contributors: sorich87
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
-Tested up to: 3.3
-Stable tag: 0.3.1
+Tested up to: 3.4
+Stable tag: 0.3.2
 
 Import users from a CSV file into WordPress
 
@@ -78,6 +78,9 @@ See [How to Update Existing Users with "Import Users from CSV"](http://pubpoet.c
 1. User import screen
 
 == Changelog ==
+
+= 0.3.2 =
+* Fixed php notice when importing
 
 = 0.3.1 =
 * Don't process empty columns in the csv file
