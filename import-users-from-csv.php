@@ -166,6 +166,7 @@ class IS_IU_Import_Users {
 						// If no error, let's update the user meta too!
 						if ( $usermeta ) {
 							foreach ( $usermeta as $metakey => $metavalue ) {
+								$metavalue = maybe_unserialize( $metavalue );
 								update_user_meta( $user_id, $metakey, $metavalue );
 							}
 						}
