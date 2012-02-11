@@ -74,34 +74,10 @@ class IS_IU_Import_Users {
 			check_admin_referer( 'is-iu-import-users-users-page_import', '_wpnonce-is-iu-import-users-users-page_import' );
 
 			if ( isset( $_FILES['users_csv']['tmp_name'] ) ) {
-				include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
-
-				// Read the files rows into an array
-				$file_handle = fopen( $_FILES['users_csv']['tmp_name'], "r" );
-				$rows = array();
-				$csv_reader = new ReadCSV( $file_handle, IS_IU_CSV_DELIMITER, "\xEF\xBB\xBF" ); // Skip any UTF-8 byte order mark.
-				while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
-					if ( empty( $line ) )
-						continue;
-
-					$rows[] = $line;
-				}
-				fclose( $file_handle );
-
-				if ( ! $rows )
-					wp_redirect( add_query_arg( 'import', 'data', wp_get_referer() ) );
-
 				// Setup settings variables
 				$password_nag          = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
 				$new_user_notification = isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
 				$errors = $user_ids    = array();
-
-				// Separate headers from the other rows
-				$headers               = $rows[0];
-				$rows                  = array_slice( $rows, 1 );
-
-				// Maybe another plugin needs to do something before import?
-				do_action( 'is_iu_pre_users_import', $headers, $rows );
 
 				// User data fields list used to differentiate with user meta
 				$userdata_fields       = array(
@@ -114,14 +90,36 @@ class IS_IU_Import_Users {
 					'role'
 				);
 
-				// Let's process the data
-				foreach ( $rows as $rkey => $columns ) {
-					if ( ! $columns )
+				include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
+
+				// Loop through the file lines
+				$file_handle = fopen( $_FILES['users_csv']['tmp_name'], 'r' );
+				$csv_reader = new ReadCSV( $file_handle, IS_IU_CSV_DELIMITER, "\xEF\xBB\xBF" ); // Skip any UTF-8 byte order mark.
+
+				$first = true;
+				while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
+
+					// If the first line is empty, return and error
+					// If another line is empty, just skip it
+					if ( empty( $line ) ) {
+						if ( $first ) {
+							wp_redirect( add_query_arg( 'import', 'data', wp_get_referer() ) );
+							exit;
+						} else {
+							continue;
+						}
+					}
+
+					// If we are on the first line, the columns are the headers
+					if ( $first ) {
+						$headers = $line;
+						$first = false;
 						continue;
+					}
 
 					// Separate user data from meta
 					$userdata = $usermeta = array();
-					foreach ( $columns as $ckey => $column ) {
+					foreach ( $line as $ckey => $column ) {
 						$column_name = $headers[$ckey];
 						$column = trim( $column );
 
@@ -139,7 +137,7 @@ class IS_IU_Import_Users {
 					$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
 					$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
 
-					// If no user meta, bailout!
+					// If no user data, bailout!
 					if ( empty( $userdata ) )
 						continue;
 
@@ -187,12 +185,14 @@ class IS_IU_Import_Users {
 								wp_new_user_notification( $user_id, $userdata['user_pass'] );
 						}
 
+						// Some plugins may need to do things after one user has been imported. Who know?
+						do_action( 'is_iu_post_user_import', $user_id );
+
 						$user_ids[] = $user_id;
 					}
 
-					// Some plugins may need to do things after one user has been imported. Who know?
-					do_action( 'is_iu_post_user_import', $user_id );
 				}
+				fclose( $file_handle );
 
 				// One more thing to do after all imports?
 				do_action( 'is_iu_post_users_import', $user_ids, $errors );
