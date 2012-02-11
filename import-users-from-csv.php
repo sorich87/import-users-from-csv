@@ -31,6 +31,9 @@ Text Domain: import-users-from-csv
 
 load_plugin_textdomain( 'import-users-from-csv', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
+if ( ! defined( 'IS_IU_CSV_DELIMITER' ) )
+	define ( 'IS_IU_CSV_DELIMITER', ',' );
+
 /**
  * Main plugin class
  *
@@ -71,13 +74,17 @@ class IS_IU_Import_Users {
 			check_admin_referer( 'is-iu-import-users-users-page_import', '_wpnonce-is-iu-import-users-users-page_import' );
 
 			if ( isset( $_FILES['users_csv']['tmp_name'] ) ) {
-				ini_set( 'auto_detect_line_endings', true );
+				include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
 
 				// Read the files rows into an array
 				$file_handle = fopen( $_FILES['users_csv']['tmp_name'], "r" );
 				$rows = array();
-				while ( ! feof( $file_handle ) ) {
-					$rows[] = fgetcsv( $file_handle, 1024 );
+				$csv_reader = new ReadCSV( $file_handle, IS_IU_CSV_DELIMITER, "\xEF\xBB\xBF" ); // Skip any UTF-8 byte order mark.
+				while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
+					if ( empty( $line ) )
+						continue;
+
+					$rows[] = $line;
 				}
 				fclose( $file_handle );
 
