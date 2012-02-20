@@ -6,7 +6,7 @@
 Plugin Name: Import Users from CSV
 Plugin URI: http://pubpoet.com/plugins/
 Description: Import Users data and metadata from a csv file.
-Version: 0.5
+Version: 0.5.1
 Author: PubPoet
 Author URI: http://pubpoet.com/
 License: GPL2
