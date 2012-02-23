@@ -153,7 +153,7 @@ class IS_IU_Import_Users {
 		<?php wp_nonce_field( 'is-iu-import-users-users-page_import', '_wpnonce-is-iu-import-users-users-page_import' ); ?>
 		<table class="form-table">
 			<tr valign="top">
-				<th scope="row"><label for"users_csv"><?php _e( 'CSV file' , 'import-users-from-csv'); ?></label></th>
+				<th scope="row"><label for="users_csv"><?php _e( 'CSV file' , 'import-users-from-csv'); ?></label></th>
 				<td><input type="file" id="users_csv" name="users_csv" value="" class="all-options" /></td>
 			</tr>
 			<tr valign="top">
@@ -162,7 +162,7 @@ class IS_IU_Import_Users {
 					<legend class="screen-reader-text"><span><?php _e( 'Notification' , 'import-users-from-csv'); ?></span></legend>
 					<label for="new_user_notification">
 						<input id="new_user_notification" name="new_user_notification" type="checkbox" value="1" />
-						Send to new users
+						<?php _e('Send to new users', 'import-users-from-csv') ?>
 					</label>
 				</fieldset></td>
 			</tr>
@@ -172,13 +172,13 @@ class IS_IU_Import_Users {
 					<legend class="screen-reader-text"><span><?php _e( 'Password nag' , 'import-users-from-csv'); ?></span></legend>
 					<label for="password_nag">
 						<input id="password_nag" name="password_nag" type="checkbox" value="1" />
-						Show password nag on new users signon
+						<?php _e('Show password nag on new users signon', 'import-users-from-csv') ?>
 					</label>
 				</fieldset></td>
 			</tr>
 		</table>
 		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e( 'Import' , 'import-users-from-csv'); ?>" />
+		 	<input type="submit" class="button-primary" value="<?php _e( 'Import' , 'import-users-from-csv'); ?>" />
 		</p>
 	</form>
 <?php
