@@ -79,6 +79,14 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: import-users-from-csv.php:165
+msgid "Send to new users"
+msgstr ""
+
+#: import-users-from-csv.php:175
+msgid "Show password nag on new users signon"
+msgstr ""
+
 #: import-users-from-csv.php:297
 #, php-format
 msgid "BEGIN %s"
