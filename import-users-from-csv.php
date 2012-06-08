@@ -156,7 +156,7 @@ class IS_IU_Import_Users {
 				<th scope="row"><label for="users_csv"><?php _e( 'CSV file' , 'import-users-from-csv'); ?></label></th>
 				<td>
 					<input type="file" id="users_csv" name="users_csv" value="" class="all-options" /><br />
-					<?php echo sprintf( __( 'You may want to see <a href="%s">the example of the CSV file</a>.' , 'import-users-from-csv'), plugin_dir_url(__FILE__).'examples/import.csv'); ?>
+					<span class="description"><?php echo sprintf( __( 'You may want to see <a href="%s">the example of the CSV file</a>.' , 'import-users-from-csv'), plugin_dir_url(__FILE__).'examples/import.csv'); ?></span>
 				</td>
 			</tr>
 			<tr valign="top">
