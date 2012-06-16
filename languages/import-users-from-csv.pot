@@ -79,6 +79,10 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: import-users-from-csv.php:159
+msgid "You may want to see <a href=\"%s\">the example of the CSV file</a>."
+msgstr ""
+
 #: import-users-from-csv.php:165
 msgid "Send to new users"
 msgstr ""
