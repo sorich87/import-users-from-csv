@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Import Users from CSV 0.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/import-users-from-csv\n"
 "POT-Creation-Date: 2011-12-17 16:55+0100\n"
-"PO-Revision-Date: 2012-06-05 23:50+0800\n"
+"PO-Revision-Date: 2012-06-06 09:08+0800\n"
 "Last-Translator: Phy <poedit@phy25.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,10 @@ msgstr "密码提示"
 #: import-users-from-csv.php:281
 msgid "Import"
 msgstr "导入"
+
+#: import-users-from-csv.php:159
+msgid "You may want to see <a href=\"%s\">the example of the CSV file</a>."
+msgstr "您也许想查看 <a href=\"%s\">CSV 文件的格式示范</a>。"
 
 #: import-users-from-csv.php:165
 msgid "Send to new users"
