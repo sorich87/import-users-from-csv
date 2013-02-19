@@ -69,7 +69,7 @@ class IS_IU_Import_Users {
 			$log_dir = trailingslashit( $upload_dir['basedir'] );
 		}
 
-		$this->lod_dir_path = $log_dir;
+		$this->log_dir_path = $log_dir;
 
 		if ( !$log_url) {
 			$log_url = trailingslashit( $upload_dir['baseurl'] );
