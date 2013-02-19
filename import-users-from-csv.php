@@ -147,11 +147,10 @@ class IS_IU_Import_Users {
 	 * @since 0.1
 	 **/
 	public function users_page() {
-		if ( ! current_user_can( 'create_users' ) )
-			wp_die( __( 'You do not have sufficient permissions to access this page.' , 'import-users-from-csv') );
 ?>
 
 <div class="wrap">
+	<?php screen_icon(); ?>
 	<h2><?php _e( 'Import users from a CSV file' , 'import-users-from-csv'); ?></h2>
 	<?php
 	$error_log_file = $this->log_dir_path . 'is_iu_errors.log';
