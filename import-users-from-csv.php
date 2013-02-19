@@ -369,7 +369,7 @@ class IS_IU_Import_Users {
 		if ( empty( $errors ) )
 			return;
 
-		$log = @fopen( $this->log_dir_path . 'is_iu_errors.log', 'a' );
+		$log = @fopen( self::instance()->log_dir_path . 'is_iu_errors.log', 'a' );
 		@fwrite( $log, sprintf( __( 'BEGIN %s' , 'import-users-from-csv'), date( 'Y-m-d H:i:s', time() ) ) . "\n" );
 
 		foreach ( $errors as $key => $error ) {
