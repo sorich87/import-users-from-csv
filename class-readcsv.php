@@ -14,6 +14,8 @@
  * http://davidhoulder.com
  */
 
+!defined('ABSPATH') && exit;
+
 class ReadCSV {
 	const field_start = 0;
 	const unquoted_field = 1;
