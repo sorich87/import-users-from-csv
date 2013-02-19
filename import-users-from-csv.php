@@ -12,26 +12,27 @@ Author URI: http://pubpoet.com/
 License: GPL2
 Text Domain: import-users-from-csv
 */
-/*  Copyright 2011  Ulrich Sossou  (https://github.com/sorich87)
+/*	Copyright 2011	Ulrich Sossou  (https://github.com/sorich87)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License, version 2, as
+	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-load_plugin_textdomain( 'import-users-from-csv', false, basename( dirname( __FILE__ ) ) . '/languages' );
+!defined('ABSPATH') && exit;
 
-if ( ! defined( 'IS_IU_CSV_DELIMITER' ) )
-	define ( 'IS_IU_CSV_DELIMITER', ',' );
+if ( ! defined( 'IS_IU_CSV_DELIMITER' ) ) {
+    define ( 'IS_IU_CSV_DELIMITER', ',' );
+}
 
 /**
  * Main plugin class
@@ -39,21 +40,51 @@ if ( ! defined( 'IS_IU_CSV_DELIMITER' ) )
  * @since 0.1
  **/
 class IS_IU_Import_Users {
-	private static $log_dir_path = '';
-	private static $log_dir_url  = '';
+	private static $ins = null;
+
+	private $log_dir_path = '';
+	private $log_dir_url  = '';
+
+	public static function instance() {
+		if ( is_null( self::$ins ) ) {
+			self::$ins = new self;
+		}
+
+		return self::$ins;
+	}
 
 	/**
 	 * Initialization
 	 *
 	 * @since 0.1
 	 **/
-	public function init() {
-		add_action( 'admin_menu', array( __CLASS__, 'add_admin_pages' ) );
-		add_action( 'init', array( __CLASS__, 'process_csv' ) );
+	public static function init() {
+		add_action('plugins_loaded', array(self::instance(), '_setup'));
+	}
 
+	public function __construct($log_dir=false, $log_url=false) {
 		$upload_dir = wp_upload_dir();
-		self::$log_dir_path = trailingslashit( $upload_dir['basedir'] );
-		self::$log_dir_url  = trailingslashit( $upload_dir['baseurl'] );
+
+		if ( !$log_dir)  {
+			$log_dir = trailingslashit( $upload_dir['basedir'] );
+		}
+
+		$this->log_dir_path = $log_dir;
+
+		if ( !$log_url) {
+			$log_url = trailingslashit( $upload_dir['baseurl'] );
+		}
+
+		$this->log_dir_url = $log_url;
+	}
+
+	public function _setup() {
+		add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+		load_plugin_textdomain(
+			'import-users-from-csv',
+			false,
+			basename( plugin_basename( __FILE__ ) ) . '/languages'
+		);
 	}
 
 	/**
@@ -62,7 +93,15 @@ class IS_IU_Import_Users {
 	 * @since 0.1
 	 **/
 	public function add_admin_pages() {
-		add_users_page( __( 'Import From CSV' , 'import-users-from-csv'), __( 'Import From CSV' , 'import-users-from-csv'), 'create_users', 'import-users-from-csv', array( __CLASS__, 'users_page' ) );
+		$page = add_users_page(
+			__( 'Import From CSV' , 'import-users-from-csv'),
+			__( 'Import From CSV' , 'import-users-from-csv'),
+			'create_users',
+			'import-users-from-csv',
+			array( $this, 'users_page' )
+		);
+
+		add_action( "load-{$page}", array( $this, 'process_csv') );
 	}
 
 	/**
@@ -76,8 +115,8 @@ class IS_IU_Import_Users {
 
 			if ( isset( $_FILES['users_csv']['tmp_name'] ) ) {
 				// Setup settings variables
-				$filename              = $_FILES['users_csv']['tmp_name'];
-				$password_nag          = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
+				$filename			   = $_FILES['users_csv']['tmp_name'];
+				$password_nag		   = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
 				$new_user_notification = isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
 
 				$results = self::import_csv( $filename, $password_nag, $new_user_notification );
@@ -108,15 +147,14 @@ class IS_IU_Import_Users {
 	 * @since 0.1
 	 **/
 	public function users_page() {
-		if ( ! current_user_can( 'create_users' ) )
-			wp_die( __( 'You do not have sufficient permissions to access this page.' , 'import-users-from-csv') );
 ?>
 
 <div class="wrap">
+	<?php screen_icon(); ?>
 	<h2><?php _e( 'Import users from a CSV file' , 'import-users-from-csv'); ?></h2>
 	<?php
-	$error_log_file = self::$log_dir_path . 'is_iu_errors.log';
-	$error_log_url  = self::$log_dir_url . 'is_iu_errors.log';
+	$error_log_file = $this->log_dir_path . 'is_iu_errors.log';
+	$error_log_url	= $this->log_dir_url . 'is_iu_errors.log';
 
 	if ( ! file_exists( $error_log_file ) ) {
 		if ( ! @fopen( $error_log_file, 'x' ) )
@@ -181,7 +219,7 @@ class IS_IU_Import_Users {
 			</tr>
 		</table>
 		<p class="submit">
-		 	<input type="submit" class="button-primary" value="<?php _e( 'Import' , 'import-users-from-csv'); ?>" />
+			<input type="submit" class="button-primary" value="<?php _e( 'Import' , 'import-users-from-csv'); ?>" />
 		</p>
 	</form>
 <?php
@@ -196,7 +234,7 @@ class IS_IU_Import_Users {
 		$errors = $user_ids = array();
 
 		// User data fields list used to differentiate with user meta
-		$userdata_fields       = array(
+		$userdata_fields	   = array(
 			'ID', 'user_login', 'user_pass',
 			'user_email', 'user_url', 'user_nicename',
 			'display_name', 'user_registered', 'first_name',
@@ -331,7 +369,7 @@ class IS_IU_Import_Users {
 		if ( empty( $errors ) )
 			return;
 
-		$log = @fopen( self::$log_dir_path . 'is_iu_errors.log', 'a' );
+		$log = @fopen( self::instance()->log_dir_path . 'is_iu_errors.log', 'a' );
 		@fwrite( $log, sprintf( __( 'BEGIN %s' , 'import-users-from-csv'), date( 'Y-m-d H:i:s', time() ) ) . "\n" );
 
 		foreach ( $errors as $key => $error ) {
