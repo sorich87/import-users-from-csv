@@ -238,9 +238,6 @@ class IS_IU_Import_Users {
 				$column_name = $headers[$ckey];
 				$column = trim( $column );
 
-				if ( empty( $column ) )
-					continue;
-
 				if ( in_array( $column_name, $userdata_fields ) ) {
 					$userdata[$column_name] = $column;
 				} else {
