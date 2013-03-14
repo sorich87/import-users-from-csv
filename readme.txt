@@ -2,8 +2,8 @@
 Contributors: sorich87
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
-Tested up to: 3.4
-Stable tag: 0.5.1
+Tested up to: 3.6
+Stable tag: 1.0.0
 
 Import users from a CSV file into WordPress
 
@@ -28,9 +28,6 @@ You can also choose to send a notification to the new users and to display passw
 
 For feature request and bug reports, [please use the forums](http://wordpress.org/tags/import-users-from-csv?forum_id=10#postform).
 Code contributions are welcome [on Github](https://github.com/sorich87/Import-Users-from-CSV).
-
-= Tutorials =
-[How to Update Existing Users with "Import Users from CSV"](http://pubpoet.com/2011/05/28/update-users-import-users-csv/)
 
 == Installation ==
 
@@ -71,15 +68,15 @@ If a column name matches a field in the user table, data from this column is imp
 Look at the example.csv file in the plugin directory to have a better understanding of how the your CSV file should be organized.
 You can try importing that file and look at the result.
 
-= How to Update Existing Users? =
-
-See [How to Update Existing Users with "Import Users from CSV"](http://pubpoet.com/2011/05/28/update-users-import-users-csv/)
-
 == Screenshots ==
 
 1. User import screen
 
 == Changelog ==
+
+= 1.0.0 =
+* Fixed bug where importing fields with "0" value doesn't work
+* Added option to update existing users by username or email
 
 = 0.5.1 =
 * Removed example plugin file to avoid invalid header error on

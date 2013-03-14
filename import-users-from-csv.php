@@ -4,11 +4,11 @@
  */
 /*
 Plugin Name: Import Users from CSV
-Plugin URI: http://pubpoet.com/plugins/
+Plugin URI: http://wordpress.org/extend/plugins/import-users-from-csv/
 Description: Import Users data and metadata from a csv file.
-Version: 0.5.1
-Author: PubPoet
-Author URI: http://pubpoet.com/
+Version: 1.0.0
+Author: Ulrich Sossou
+Author URI: http://ulrichsossou.com/
 License: GPL2
 Text Domain: import-users-from-csv
 */
