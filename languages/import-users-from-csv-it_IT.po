@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Import Users from CSV v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-04-20 16:44+0100\n"
+"Last-Translator: Adriano Calvitto <adriano.calvitto@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"Language: it_IT\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:65
+msgid "Import From CSV"
+msgstr "Importa da CSV"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:117
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Non hai permessi sufficienti per accedere a questa pagina."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:121
+msgid "Import users from a CSV file"
+msgstr "Importa utenti da un file CSV"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:128
+#, php-format
+msgid ""
+"Notice: please make the directory %s writable so that you can see the error "
+"log."
+msgstr ""
+"Avvertimento: per favore imposta la cartella %s come scrivibile in modo da "
+"poter consultare il log degli errori. "
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:134
+#, php-format
+msgid ", please <a href=\"%s\">check the error log</a>"
+msgstr ", per favore <a href=\"%s\">controlla il log degli errori</a>"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:138
+msgid "Error during file upload."
+msgstr "Errore durante il caricamento del file."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:141
+msgid "Cannot extract data from uploaded file or no file was uploaded."
+msgstr ""
+"Non &egrave; stato possibile estrarre i dati dal file caricato o nessun file "
+"&egrave; stato caricato."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:144
+#, php-format
+msgid "No user was successfully imported%s."
+msgstr "Nessun utente &egrave; stato importato%s."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:147
+#, php-format
+msgid "Some users were successfully imported but some were not%s."
+msgstr "Alcuni utenti sono stati importati con successo ma altri no%s."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:150
+msgid "Users import was successful."
+msgstr "Importazione utenti andata a buon fine."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:161
+msgid "CSV file"
+msgstr "File CSV"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:164
+#, php-format
+msgid "You may want to see <a href=\"%s\">the example of the CSV file</a>."
+msgstr "Qui puoi vedere <a href=\"%s\">un esempio del file CSV</a>."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:168 import-users-from-csv.php:170
+msgid "Notification"
+msgstr "Notifica"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:173
+msgid "Send to new users"
+msgstr "Invia ai nuovi utenti"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:178 import-users-from-csv.php:180
+msgid "Password nag"
+msgstr "Password nag"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:183
+msgid "Show password nag on new users signon"
+msgstr "Mostra password nag quando un utente si iscrive."
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:188 import-users-from-csv.php:190
+msgid "Users update"
+msgstr "Aggiornamento utenti"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:193
+msgid "Update user when a username or email exists"
+msgstr "Aggiorna utente quanto un username o una email esiste"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:199
+msgid "Import"
+msgstr "Importa"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:362
+#, php-format
+msgid "BEGIN %s"
+msgstr "INIZIO %s"
+
+# @ import-users-from-csv
+#: import-users-from-csv.php:367
+#, php-format
+msgid "[Line %1$s] %2$s"
+msgstr "[Linea %1$s] %2$s"
