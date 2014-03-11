@@ -258,7 +258,8 @@ class IS_IU_Import_Users {
 			$userdata = $usermeta = array();
 			foreach ( $line as $ckey => $column ) {
 				$column_name = $headers[$ckey];
-				$column = trim( $column );
+				$column = preg_split("/,+/", trim($column));
+                                if ( 1 == count ( $column ) ) { $column = $column[0]; } // Single-value array
 
 				if ( in_array( $column_name, $userdata_fields ) ) {
 					$userdata[$column_name] = $column;
