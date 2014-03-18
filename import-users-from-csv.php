@@ -74,7 +74,7 @@ class IS_IU_Import_Users {
 		if ( isset( $_POST['_wpnonce-is-iu-import-users-users-page_import'] ) ) {
 			check_admin_referer( 'is-iu-import-users-users-page_import', '_wpnonce-is-iu-import-users-users-page_import' );
 
-			if ( isset( $_FILES['users_csv']['tmp_name'] ) ) {
+			if ( !empty( $_FILES['users_csv']['tmp_name'] ) ) {
 				// Setup settings variables
 				$filename              = $_FILES['users_csv']['tmp_name'];
 				$password_nag          = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
@@ -231,111 +231,115 @@ class IS_IU_Import_Users {
 		include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
 
 		// Loop through the file lines
-		$file_handle = fopen( $filename, 'r' );
-		$csv_reader = new ReadCSV( $file_handle, IS_IU_CSV_DELIMITER, "\xEF\xBB\xBF" ); // Skip any UTF-8 byte order mark.
+		$file_handle = @fopen( $filename, 'r' );
+		if($file_handle) {
+			$csv_reader = new ReadCSV( $file_handle, IS_IU_CSV_DELIMITER, "\xEF\xBB\xBF" ); // Skip any UTF-8 byte order mark.
 
-		$first = true;
-		$rkey = 0;
-		while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
+			$first = true;
+			$rkey = 0;
+			while ( ( $line = $csv_reader->get_row() ) !== NULL ) {
 
-			// If the first line is empty, abort
-			// If another line is empty, just skip it
-			if ( empty( $line ) ) {
-				if ( $first )
-					break;
-				else
-					continue;
-			}
-
-			// If we are on the first line, the columns are the headers
-			if ( $first ) {
-				$headers = $line;
-				$first = false;
-				continue;
-			}
-
-			// Separate user data from meta
-			$userdata = $usermeta = array();
-			foreach ( $line as $ckey => $column ) {
-				$column_name = $headers[$ckey];
-				$column = trim( $column );
-
-				if ( in_array( $column_name, $userdata_fields ) ) {
-					$userdata[$column_name] = $column;
-				} else {
-					$usermeta[$column_name] = $column;
+				// If the first line is empty, abort
+				// If another line is empty, just skip it
+				if ( empty( $line ) ) {
+					if ( $first )
+						break;
+					else
+						continue;
 				}
-			}
 
-			// A plugin may need to filter the data and meta
-			$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
-			$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
+				// If we are on the first line, the columns are the headers
+				if ( $first ) {
+					$headers = $line;
+					$first = false;
+					continue;
+				}
 
-			// If no user data, bailout!
-			if ( empty( $userdata ) )
-				continue;
+				// Separate user data from meta
+				$userdata = $usermeta = array();
+				foreach ( $line as $ckey => $column ) {
+					$column_name = $headers[$ckey];
+					$column = trim( $column );
 
-			// Something to be done before importing one user?
-			do_action( 'is_iu_pre_user_import', $userdata, $usermeta );
-
-			$user = $user_id = false;
-
-			if ( isset( $userdata['ID'] ) )
-				$user = get_user_by( 'ID', $userdata['ID'] );
-
-			if ( ! $user && $users_update ) {
-				if ( isset( $userdata['user_login'] ) )
-					$user = get_user_by( 'login', $userdata['user_login'] );
-
-				if ( ! $user && isset( $userdata['user_email'] ) )
-					$user = get_user_by( 'email', $userdata['user_email'] );
-			}
-
-			$update = false;
-			if ( $user ) {
-				$userdata['ID'] = $user->ID;
-				$update = true;
-			}
-
-			// If creating a new user and no password was set, let auto-generate one!
-			if ( ! $update && empty( $userdata['user_pass'] ) )
-				$userdata['user_pass'] = wp_generate_password( 12, false );
-
-			if ( $update )
-				$user_id = wp_update_user( $userdata );
-			else
-				$user_id = wp_insert_user( $userdata );
-
-			// Is there an error o_O?
-			if ( is_wp_error( $user_id ) ) {
-				$errors[$rkey] = $user_id;
-			} else {
-				// If no error, let's update the user meta too!
-				if ( $usermeta ) {
-					foreach ( $usermeta as $metakey => $metavalue ) {
-						$metavalue = maybe_unserialize( $metavalue );
-						update_user_meta( $user_id, $metakey, $metavalue );
+					if ( in_array( $column_name, $userdata_fields ) ) {
+						$userdata[$column_name] = $column;
+					} else {
+						$usermeta[$column_name] = $column;
 					}
 				}
 
-				// If we created a new user, maybe set password nag and send new user notification?
-				if ( ! $update ) {
-					if ( $password_nag )
-						update_user_option( $user_id, 'default_password_nag', true, true );
+				// A plugin may need to filter the data and meta
+				$userdata = apply_filters( 'is_iu_import_userdata', $userdata, $usermeta );
+				$usermeta = apply_filters( 'is_iu_import_usermeta', $usermeta, $userdata );
 
-					if ( $new_user_notification )
-						wp_new_user_notification( $user_id, $userdata['user_pass'] );
+				// If no user data, bailout!
+				if ( empty( $userdata ) )
+					continue;
+
+				// Something to be done before importing one user?
+				do_action( 'is_iu_pre_user_import', $userdata, $usermeta );
+
+				$user = $user_id = false;
+
+				if ( isset( $userdata['ID'] ) )
+					$user = get_user_by( 'ID', $userdata['ID'] );
+
+				if ( ! $user && $users_update ) {
+					if ( isset( $userdata['user_login'] ) )
+						$user = get_user_by( 'login', $userdata['user_login'] );
+
+					if ( ! $user && isset( $userdata['user_email'] ) )
+						$user = get_user_by( 'email', $userdata['user_email'] );
 				}
 
-				// Some plugins may need to do things after one user has been imported. Who know?
-				do_action( 'is_iu_post_user_import', $user_id );
+				$update = false;
+				if ( $user ) {
+					$userdata['ID'] = $user->ID;
+					$update = true;
+				}
 
-				$user_ids[] = $user_id;
+				// If creating a new user and no password was set, let auto-generate one!
+				if ( ! $update && empty( $userdata['user_pass'] ) )
+					$userdata['user_pass'] = wp_generate_password( 12, false );
+
+				if ( $update )
+					$user_id = wp_update_user( $userdata );
+				else
+					$user_id = wp_insert_user( $userdata );
+
+				// Is there an error o_O?
+				if ( is_wp_error( $user_id ) ) {
+					$errors[$rkey] = $user_id;
+				} else {
+					// If no error, let's update the user meta too!
+					if ( $usermeta ) {
+						foreach ( $usermeta as $metakey => $metavalue ) {
+							$metavalue = maybe_unserialize( $metavalue );
+							update_user_meta( $user_id, $metakey, $metavalue );
+						}
+					}
+
+					// If we created a new user, maybe set password nag and send new user notification?
+					if ( ! $update ) {
+						if ( $password_nag )
+							update_user_option( $user_id, 'default_password_nag', true, true );
+
+						if ( $new_user_notification )
+							wp_new_user_notification( $user_id, $userdata['user_pass'] );
+					}
+
+					// Some plugins may need to do things after one user has been imported. Who know?
+					do_action( 'is_iu_post_user_import', $user_id );
+
+					$user_ids[] = $user_id;
+				}
+
+				$rkey++;
 			}
-
-			$rkey++;
+			fclose( $file_handle );
+		} else {
+			$errors[] = new WP_Error('file_read', 'Unable to open CSV file.');
 		}
-		fclose( $file_handle );
 
 		// One more thing to do after all imports?
 		do_action( 'is_iu_post_users_import', $user_ids, $errors );
