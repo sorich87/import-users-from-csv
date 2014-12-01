@@ -329,7 +329,7 @@ class IS_IU_Import_Users {
 					}
 
 					// Some plugins may need to do things after one user has been imported. Who know?
-					do_action( 'is_iu_post_user_import', $user_id );
+					do_action( 'is_iu_post_user_import', $user_id, $userdata, $usermeta );
 
 					$user_ids[] = $user_id;
 				}
