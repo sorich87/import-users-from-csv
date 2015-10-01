@@ -150,3 +150,4 @@ Code cleanup. Added readme.txt.
 
 = 0.1 =
 First release.
+2015
