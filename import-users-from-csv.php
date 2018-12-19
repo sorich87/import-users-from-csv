@@ -68,7 +68,7 @@ class IS_IU_Import_Users {
 	 *
 	 * @since 0.1
 	 **/
-	public function init() {
+	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'add_admin_pages' ) );
 		add_action( 'init', array( __CLASS__, 'process_csv' ) );
 
@@ -84,7 +84,7 @@ class IS_IU_Import_Users {
 	 *
 	 * @since 0.1
 	 **/
-	public function add_admin_pages() {
+	public static function add_admin_pages() {
 		add_users_page( __( 'Import From CSV' , 'import-users-from-csv'), __( 'Import From CSV' , 'import-users-from-csv'), 'create_users', 'import-users-from-csv', array( __CLASS__, 'users_page' ) );
 	}
 
@@ -93,21 +93,21 @@ class IS_IU_Import_Users {
 	 *
 	 * @since 0.1
 	 **/
-	public function process_csv() {
+	public static function process_csv() {
 		if ( isset( $_POST['_wpnonce-is-iu-import-users-users-page_import'] ) ) {
 			check_admin_referer( 'is-iu-import-users-users-page_import', '_wpnonce-is-iu-import-users-users-page_import' );
 
 			if ( !empty( $_FILES['users_csv']['tmp_name'] ) ) {
 				/* Setup settings variables */
-				$filename              = $_FILES['users_csv']['tmp_name'];
-				$password_nag          = isset( $_POST['password_nag'] ) ? $_POST['password_nag'] : false;
-				$users_update          = isset( $_POST['users_update'] ) ? $_POST['users_update'] : false;
-				$new_user_notification = isset( $_POST['new_user_notification'] ) ? $_POST['new_user_notification'] : false;
+				$filename              = sanitize_text_field( $_FILES['users_csv']['tmp_name'] );
+				$password_nag          = isset( $_POST['password_nag'] ) ? sanitize_text_field( $_POST['password_nag'] ) : false;
+				$users_update          = isset( $_POST['users_update'] ) ? sanitize_text_field( $_POST['users_update'] ) : false;
+				$new_user_notification = isset( $_POST['new_user_notification'] ) ? sanitize_text_field( $_POST['new_user_notification'] ) : false;
 
 				$results = self::import_csv( $filename, array(
-					'password_nag' => $password_nag,
-					'new_user_notification' => $new_user_notification,
-					'users_update' => $users_update
+					'password_nag' => intval( $password_nag ),
+					'new_user_notification' => intval( $new_user_notification ),
+					'users_update' => intval( $users_update )
 				) );
 
 				if ( ! $results['user_ids'] ){
@@ -133,7 +133,7 @@ class IS_IU_Import_Users {
 	 *
 	 * @since 0.1
 	 **/
-	public function users_page() {
+	public static function users_page() {
 		if ( ! current_user_can( 'create_users' ) ){
 			wp_die( __( 'You do not have sufficient permissions to access this page.' , 'import-users-from-csv') );
 		}
@@ -153,13 +153,15 @@ class IS_IU_Import_Users {
 					}
 				}
 
-				if ( isset( $_GET['import'] ) ) {
+				$import = isset( $_GET['import'] ) ? sanitize_text_field( $_GET['import'] ) : false;
+
+				if ( $import ) {
 					$error_log_msg = '';
 					if ( file_exists( $error_log_file ) ){
-						$error_log_msg = sprintf( __( ', please <a href="%s">check the error log</a>' , 'import-users-from-csv'), $error_log_url );
+						$error_log_msg = sprintf( __( ", please <a href='%s' target='_blank'>check the error log</a>", 'import-users-from-csv'), esc_url( $error_log_url ) );
 					}
 
-					switch ( $_GET['import'] ) {
+					switch ( $import ) {
 						case 'file':
 							$message = __( 'Error during file upload.' , 'import-users-from-csv');
 							self::render_notice('error', $message);
@@ -203,7 +205,7 @@ class IS_IU_Import_Users {
 							<input type="file" id="users_csv" name="users_csv" value="" class="all-options" /><br />
 							<span class="description">
 								<?php
-									echo sprintf( __( 'You may want to see <a href="%s">the example of the CSV file</a>.' , 'import-users-from-csv'), plugin_dir_url(__FILE__).'examples/import.csv');
+									echo sprintf( __( 'You may want to see <a href="%s">the example of the CSV file</a>.' , 'import-users-from-csv'), esc_url( plugin_dir_url(__FILE__).'examples/import.csv' ) );
 								?>
 							</span>
 						</td>
@@ -448,7 +450,7 @@ class IS_IU_Import_Users {
 						}
 
 						if ( $new_user_notification ) {
-							wp_new_user_notification( $user_id, $userdata['user_pass'] );
+							wp_new_user_notification( $user_id, null, 'user' );
 						}
 					}
 
@@ -488,7 +490,7 @@ class IS_IU_Import_Users {
 		}
 
 		$log = @fopen( self::$log_dir_path . 'is_iu_errors.log', 'a' );
-		@fwrite( $log, sprintf( __( 'BEGIN %s' , 'import-users-from-csv'), date( 'Y-m-d H:i:s', time() ) ) . "\n" );
+		@fwrite( $log, sprintf( __( 'BEGIN %s' , 'import-users-from-csv'), date_i18n( 'Y-m-d H:i:s', time() ) ) . "\n" );
 
 		foreach ( $errors as $key => $error ) {
 			$line = $key + 1;
@@ -500,16 +502,16 @@ class IS_IU_Import_Users {
 	}
 
 	/**
-	 * Echo out a notice withs specific class
+	 * Echo out a notice withs specific class.
 	 *
 	 * @param $class - class to add to div
-	 * @param $message - The content of the notice
+	 * @param $message - The content of the notice. This should be escaped before being passed in to ensure proper escaping is done.
+	 *
 	 *
 	 * @since 1.0.1
 	*/
 	private static function render_notice($class, $message){
 		$class = esc_attr($class);
-		$message = esc_attr($message);
 		echo "<div class='$class'><p><strong>$message</strong></p></div>";
 	}
 }
