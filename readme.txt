@@ -1,21 +1,24 @@
 === Import Users from CSV ===
-Contributors: sorich87
+Contributors: sorich87, andrewza
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
-Tested up to: 3.6
-Stable tag: 1.0.0
+Requires PHP: 5.6
+Tested up to: 5.0
+Stable tag: trunk
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4GC4JEZH7KSKL
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import users from a CSV file into WordPress
+
+Import users from a CSV into WordPress
 
 == Description ==
-
-I needed to batch import users into WordPress but I didn't find any plugin which would import all the user data fields as well as user meta.
 
 This plugin allows you to import users from an uploaded CSV file. It will add users with basic information as well as meta fields and user role.
 
 You can also choose to send a notification to the new users and to display password nag on user login.
 
-[Check out my other free plugins.](http://profiles.wordpress.org/users/sorich87/)
+[Check out my other free plugins.](https://profiles.wordpress.org/users/andrewza/)
 
 = Features =
 
@@ -26,8 +29,8 @@ You can also choose to send a notification to the new users and to display passw
 * Sends new user notification (if the option is selected)
 * Shows password nag on user login (if the option is selected)
 
-For feature request and bug reports, [please use the forums](http://wordpress.org/tags/import-users-from-csv?forum_id=10#postform).
-Code contributions are welcome [on Github](https://github.com/sorich87/Import-Users-from-CSV).
+For feature request and bug reports, [please use the forums](https://wordpress.org/support/plugin/import-users-from-csv).
+Code contributions are welcome [on Github](https://github.com/andrewlimaza/import-users-from-csv).
 
 == Installation ==
 
@@ -37,11 +40,6 @@ For an automatic installation through WordPress:
 1. Search for 'Import Users from CSV'
 1. Click 'Install Now' and activate the plugin
 1. Upload your CSV file in the 'Users' menu, under 'Import From CSV'
-
-
-Or use a nifty tool by WordPress lead developer Mark Jaquith:
-
-1. Visit [this link](http://coveredwebservices.com/wp-plugin-install/?plugin=import-users-from-csv) and follow the instructions.
 
 
 For a manual installation via FTP:
@@ -73,6 +71,12 @@ You can try importing that file and look at the result.
 1. User import screen
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed timeout bug on import.
+* Improved settings area layout.
+* General code refactor and improved security.
+* Screenshot update.
 
 = 1.0.0 =
 * Fixed bug where importing fields with "0" value doesn't work
@@ -127,6 +131,9 @@ provided (performance improvement)
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+* Security and performance improvements.
+
 = 0.5.1 =
 * Installation error fix.
 
@@ -137,16 +144,16 @@ provided (performance improvement)
 * RFC 4180 compliance, performance improvement and bug fix.
 
 = 0.3 =
-Bug fix, performance improvement and internationalization.
+* Bug fix, performance improvement and internationalization.
 
 = 0.2.2 =
-Fix bug with users import when no user meta is set.
+* Fix bug with users import when no user meta is set.
 
 = 0.2.1 =
-Various bug fixes and documentation improvements.
+* Various bug fixes and documentation improvements.
 
 = 0.2 =
-Code cleanup. Added readme.txt.
+* Code cleanup. Added readme.txt.
 
 = 0.1 =
-First release.
+* First release.
