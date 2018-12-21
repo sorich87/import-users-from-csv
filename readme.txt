@@ -66,6 +66,9 @@ If a column name matches a field in the user table, data from this column is imp
 Look at the example.csv file in the plugin directory to have a better understanding of how the your CSV file should be organized.
 You can try importing that file and look at the result.
 
+= Credits =
+Thanks to Ulrich Sossou for initially creating this plugin. Be sure to [check out his other WordPress plugins](https://profiles.wordpress.org/sorich87/) or [GitHub profile](https://github.com/sorich87).
+
 == Screenshots ==
 
 1. User import screen
