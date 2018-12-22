@@ -264,7 +264,9 @@ class IS_IU_Import_Users {
 		/* Stop timeouts */
 		@set_time_limit(0);
 
-		include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
+		if ( ! class_exists( 'ReadCSV' ) ) {
+			include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
+		}
 
 		$errors = $user_ids = array();
 
