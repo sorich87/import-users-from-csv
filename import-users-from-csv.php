@@ -410,6 +410,10 @@ class IS_IU_Import_Users {
 					/* No password set for this user, let's generate one automatically */
 					$userdata['user_pass'] = wp_generate_password( 12, false );
 				}
+                
+                if ( ! empty( $userdata['role'] ) ) {
+                    $userdata['role'] = strtolower( $userdata['role'] );
+                }
 
 				if ( $update ){
 					$user_id = wp_update_user( $userdata );
@@ -441,7 +445,7 @@ class IS_IU_Import_Users {
 					}
 
 					/* Hook to allow other plugins to run functionality post import */
-					do_action( 'is_iu_post_user_import', $user_id );
+					do_action( 'is_iu_post_user_import', $user_id, $userdata, $usermeta );
 
 					$user_ids[] = $user_id;
 				}
