@@ -1,0 +1,12 @@
+{
+    "name": " andrewlimaza/import-users-from-csv ",
+    "description": "Import users from a CSV into WordPress",
+    "authors": [
+        {
+            "name": "Andrew Lima",
+            "homepage": "https://github.com/andrewlimaza/import-users-from-csv"
+        }
+    ],
+    "license": "GPL-2.0+",
+    "type": "wordpress-plugin"
+}
