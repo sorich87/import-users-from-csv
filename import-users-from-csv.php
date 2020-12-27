@@ -60,6 +60,10 @@ class IS_IU_Import_Users {
 		self::$log_dir_path = trailingslashit( $upload_dir['basedir'] );
 		self::$log_dir_url  = trailingslashit( $upload_dir['baseurl'] );
 
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once __DIR__ . '/includes/import-users-from-csv.wpcli.php';
+		}
+
 		do_action('is_iu_after_init');
 	}
 
