@@ -331,6 +331,9 @@ class IS_IU_Import_Users {
 					continue;
 				}
 
+				/* Prepare an array for multiple user roles */
+				$user_roles = array();
+
 				/* Separate user data from meta */
 				$userdata = $usermeta = array();
 				foreach ( $line as $ckey => $column ) {
@@ -413,6 +416,13 @@ class IS_IU_Import_Users {
                 
                 if ( ! empty( $userdata['role'] ) ) {
                     $userdata['role'] = strtolower( $userdata['role'] );
+
+                    $user_roles = explode( ',', $userdata['role'] );
+	                $user_roles = array_map( 'trim', $user_roles );
+
+                    if( count( $user_roles ) > 1 ) {
+	                    $userdata['role'] = reset( $user_roles );
+                    }
                 }
 
 				if ( $update ){
@@ -432,6 +442,12 @@ class IS_IU_Import_Users {
 							update_user_meta( $user_id, $metakey, $metavalue );
 						}
 					}
+
+					/* Let's update the user roles! */
+                    foreach( $user_roles as $user_role ){
+                        $user = new WP_User( $user_id );
+                        $user->add_role( $user_role );
+                    }
 
 					/* If we created a new user, maybe set password nag and send new user notification? */
 					if ( ! $update ) {
