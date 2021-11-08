@@ -460,13 +460,15 @@ class IS_IU_Import_Users {
 		/* One more thing to do after all imports? */
 		do_action( 'is_iu_post_users_import', $user_ids, $errors );
 
+		$errors = apply_filters( 'is_iu_errors_filter', $errors, $user_ids );
+
 		/* Let's log the errors */
 		self::log_errors( $errors );
 
-		return array(
+		return apply_filters( 'is_iu_return_import_results', array(
 			'user_ids' => $user_ids,
 			'errors'   => $errors
-		);
+		) );
 	}
 
 	/**
