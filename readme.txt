@@ -3,8 +3,8 @@ Contributors: sorich87, andrewza
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
 Requires PHP: 5.6
-Tested up to: 5.0
-Stable tag: trunk
+Tested up to: 5.9
+Stable tag: 1.1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4GC4JEZH7KSKL
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -74,6 +74,11 @@ Thanks to Ulrich Sossou for initially creating this plugin. Be sure to [check ou
 1. User import screen
 
 == Changelog ==
+= 1.1 =
+* ENHANCEMENT: Added support for WPCLI (@mircobabini)
+* ENHANCEMENT: Added support for multiple roles during import, use comma-separated value for multiple roles (@mircobabini)
+* ENHANCEMENT: Removed password nag option as this is no longer supported.
+* ENHANCEMENT: New filter added 'is_iu_errors_filter' for throwing error messages. Helpful for third party developers extending onto IUCSV functionality.
 
 = 1.0.1 =
 * Fixed timeout bug on import.

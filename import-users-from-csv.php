@@ -3,7 +3,7 @@
 Plugin Name: Import Users from CSV
 Plugin URI: http://wordpress.org/extend/plugins/import-users-from-csv/
 Description: Import Users data and metadata from a csv file.
-Version: 1.0.1
+Version: 1.1
 Author: Andrew Lima
 Author URI: https://andrewlima.co.za
 License: GPL2
