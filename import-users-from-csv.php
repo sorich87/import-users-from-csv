@@ -84,12 +84,10 @@ class IS_IU_Import_Users {
 			if ( !empty( $_FILES['users_csv']['tmp_name'] ) ) {
 				/* Setup settings variables */
 				$filename              = sanitize_text_field( $_FILES['users_csv']['tmp_name'] );
-				$password_nag          = isset( $_POST['password_nag'] ) ? sanitize_text_field( $_POST['password_nag'] ) : false;
 				$users_update          = isset( $_POST['users_update'] ) ? sanitize_text_field( $_POST['users_update'] ) : false;
 				$new_user_notification = isset( $_POST['new_user_notification'] ) ? sanitize_text_field( $_POST['new_user_notification'] ) : false;
 
 				$results = self::import_csv( $filename, array(
-					'password_nag' => intval( $password_nag ),
 					'new_user_notification' => intval( $new_user_notification ),
 					'users_update' => intval( $users_update )
 				) );
@@ -212,23 +210,6 @@ class IS_IU_Import_Users {
 						</td>
 					</tr>
 					<tr valign="top">
-						<td scope="row">
-							<strong>
-								<?php _e( 'Password nag' , 'import-users-from-csv'); ?>
-							</strong>
-						</td>
-						<td>
-							<fieldset>
-								<legend class="screen-reader-text"><span><?php _e( 'Password nag' , 'import-users-from-csv'); ?></span></legend>
-
-								<label for="password_nag">
-									<input id="password_nag" name="password_nag" type="checkbox" value="1" />
-									<?php _e('Show password nag on new users signon', 'import-users-from-csv') ?>
-								</label>
-							</fieldset>
-						</td>
-					</tr>
-					<tr valign="top">
 						<td scope="row"><strong><?php _e( 'Users update' , 'import-users-from-csv'); ?></strong></td>
 						<td>
 							<fieldset>
@@ -271,7 +252,6 @@ class IS_IU_Import_Users {
 		$errors = $user_ids = array();
 
 		$defaults = array(
-			'password_nag' => false,
 			'new_user_notification' => false,
 			'users_update' => false
 		);
@@ -449,12 +429,8 @@ class IS_IU_Import_Users {
                         $user->add_role( $user_role );
                     }
 
-					/* If we created a new user, maybe set password nag and send new user notification? */
+					/* If we created a new user, maybe send new notification */
 					if ( ! $update ) {
-						if ( $password_nag ){
-							update_user_option( $user_id, 'default_password_nag', true, true );
-						}
-
 						if ( $new_user_notification ) {
 							wp_new_user_notification( $user_id, null, 'user' );
 						}
