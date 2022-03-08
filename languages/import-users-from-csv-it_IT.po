@@ -1,48 +1,43 @@
+# Copyright (C) 2022 Andrew Lima
+# This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Import Users from CSV v1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-04-20 16:44+0100\n"
-"Last-Translator: Adriano Calvitto <adriano.calvitto@gmail.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: Import Users from CSV 1.1\n"
+"Report-Msgid-Bugs-To: support@yoohooplugins.com\n"
+"Last-Translator: Yoohoo Plugins <support@yoohooplugins.com>\n"
+"Language-Team: Yoohoo Plugins <support@yoohooplugins.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
-"X-Poedit-Basepath: ../\n"
-"X-Textdomain-Support: yes\n"
-"Language: it_IT\n"
-"X-Poedit-SearchPath-0: .\n"
+"POT-Creation-Date: 2022-03-08T13:32:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: import-users-from-csv\n"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:65
+#: import-users-from-csv.php:76
 msgid "Import From CSV"
 msgstr "Importa da CSV"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:117
+#: import-users-from-csv.php:124
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Non hai permessi sufficienti per accedere a questa pagina."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:121
+#: import-users-from-csv.php:130
 msgid "Import users from a CSV file"
 msgstr "Importa utenti da un file CSV"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:128
+#: import-users-from-csv.php:137
 #, php-format
-msgid ""
-"Notice: please make the directory %s writable so that you can see the error "
-"log."
-msgstr ""
-"Avvertimento: per favore imposta la cartella %s come scrivibile in modo da "
-"poter consultare il log degli errori. "
+msgid "Notice: please make the directory %s writable so that you can see the error log."
+msgstr "Avvertimento: per favore imposta la cartella %s come scrivibile in modo da poter consultare il log degli errori. "
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:134
@@ -52,56 +47,66 @@ msgstr ", per favore <a href=\"%s\">controlla il log degli errori</a>"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:138
+#: import-users-from-csv.php:152
 msgid "Error during file upload."
 msgstr "Errore durante il caricamento del file."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:141
+#: import-users-from-csv.php:156
 msgid "Cannot extract data from uploaded file or no file was uploaded."
-msgstr ""
-"Non &egrave; stato possibile estrarre i dati dal file caricato o nessun file "
-"&egrave; stato caricato."
+msgstr "Non &egrave; stato possibile estrarre i dati dal file caricato o nessun file &egrave; stato caricato."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:144
+#: import-users-from-csv.php:160
 #, php-format
 msgid "No user was successfully imported%s."
 msgstr "Nessun utente &egrave; stato importato%s."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:147
+#: import-users-from-csv.php:164
 #, php-format
 msgid "Some users were successfully imported but some were not%s."
 msgstr "Alcuni utenti sono stati importati con successo ma altri no%s."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:150
+#: import-users-from-csv.php:168
 msgid "Users import was successful."
 msgstr "Importazione utenti andata a buon fine."
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:161
+#: import-users-from-csv.php:187
 msgid "CSV file"
 msgstr "File CSV"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:164
+#: import-users-from-csv.php:194
 #, php-format
 msgid "You may want to see <a href=\"%s\">the example of the CSV file</a>."
 msgstr "Qui puoi vedere <a href=\"%s\">un esempio del file CSV</a>."
 
 # @ import-users-from-csv
-#: import-users-from-csv.php:168 import-users-from-csv.php:170
+#: import-users-from-csv.php:168
+#: import-users-from-csv.php:170
+#: import-users-from-csv.php:202
+#: import-users-from-csv.php:207
 msgid "Notification"
 msgstr "Notifica"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:173
+#: import-users-from-csv.php:211
 msgid "Send to new users"
 msgstr "Invia ai nuovi utenti"
 
 # @ import-users-from-csv
-#: import-users-from-csv.php:178 import-users-from-csv.php:180
+#: import-users-from-csv.php:178
+#: import-users-from-csv.php:180
 msgid "Password nag"
 msgstr "Password nag"
 
@@ -111,28 +116,59 @@ msgid "Show password nag on new users signon"
 msgstr "Mostra password nag quando un utente si iscrive."
 
 # @ import-users-from-csv
-#: import-users-from-csv.php:188 import-users-from-csv.php:190
+#: import-users-from-csv.php:188
+#: import-users-from-csv.php:190
+#: import-users-from-csv.php:217
+#: import-users-from-csv.php:220
 msgid "Users update"
 msgstr "Aggiornamento utenti"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:193
+#: import-users-from-csv.php:224
 msgid "Update user when a username or email exists"
 msgstr "Aggiorna utente quanto un username o una email esiste"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:199
+#: import-users-from-csv.php:237
 msgid "Import"
 msgstr "Importa"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:362
+#: import-users-from-csv.php:481
 #, php-format
 msgid "BEGIN %s"
 msgstr "INIZIO %s"
 
 # @ import-users-from-csv
 #: import-users-from-csv.php:367
+#: import-users-from-csv.php:486
 #, php-format
 msgid "[Line %1$s] %2$s"
 msgstr "[Linea %1$s] %2$s"
+
+#. Plugin Name of the plugin
+msgid "Import Users from CSV"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "http://wordpress.org/extend/plugins/import-users-from-csv/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Import Users data and metadata from a csv file."
+msgstr ""
+
+#. Author of the plugin
+msgid "Andrew Lima"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://andrewlima.co.za"
+msgstr ""
+
+#: import-users-from-csv.php:147
+msgid ", please <a href='%s' target='_blank'>check the error log</a>"
+msgstr ""
