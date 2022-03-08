@@ -13,7 +13,6 @@ WP_CLI::add_command( 'iucsv', function ( $args, $params ) {
 
 			$args = array(
 				'users_update'               => rest_sanitize_boolean( $params['users_update'] ?? false ),
-				'password_nag'               => rest_sanitize_boolean( $params['password_nag'] ?? false ),
 				'new_user_notificationd_nag' => rest_sanitize_boolean( $params['new_user_notificationd_nag'] ?? false ),
 			);
 
