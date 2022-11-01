@@ -1,9 +1,9 @@
 === Import Users from CSV ===
-Contributors: sorich87, andrewza
+Contributors: sorich87, andrewza, paidmembershipspro
 Tags: user, users, csv, batch, import, importer, admin
 Requires at least: 3.1
 Requires PHP: 5.6
-Tested up to: 5.9
+Tested up to: 6.1
 Stable tag: 1.1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4GC4JEZH7KSKL
 License: GPLv2 or later
